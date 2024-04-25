@@ -90,7 +90,7 @@ func RunningSpentCalories(action int, weight, duration float64) float64 {
 	// ((18 * СредняяСкоростьВКм/ч * 1.79) * ВесСпортсменаВКг / mInKM * ВремяТренировкиВЧасах * minInH)
 
 	meanSpeed := meanSpeed(action, duration)
-	calories := ((runningCaloriesMeanSpeedMultiplier * meanSpeed * runningCaloriesMeanSpeedShift) * (weight / mInKm) * duration * minInH)
+	calories := (runningCaloriesMeanSpeedMultiplier * meanSpeed * runningCaloriesMeanSpeedShift) * weight / mInKm * duration * minInH
 	return calories
 }
 
@@ -112,8 +112,9 @@ func WalkingSpentCalories(action int, duration, weight, height float64) float64 
 	// ваш код здесь
 	// ((0.035 * ВесСпортсменаВКг + (СредняяСкоростьВМетрахВСекунду**2 / РостВМетрах)* 0.029 * ВесСпортсменаВКг) * ВремяТренировкиВЧасах * minInH)
 
-	meanSpeed := meanSpeed(action, duration) * kmhInMsec
-	calories := (walkingCaloriesWeightMultiplier*weight + (math.Pow(meanSpeed, 2)/(height/cmInM))*walkingSpeedHeightMultiplier*weight) * duration * minInH
+	walkingSpeed := meanSpeed(action, duration) * kmhInMsec
+	heightMetr := height / cmInM
+	calories := (walkingCaloriesWeightMultiplier*weight + (math.Pow(walkingSpeed, 2)/heightMetr)*walkingSpeedHeightMultiplier*weight) * duration * minInH
 	return calories
 }
 

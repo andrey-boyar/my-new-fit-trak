@@ -1,3 +1,3 @@
-module github.com/Yandex-Practicum/go-first-floor-sprint-four
+module github.com/andrey-boyar/my-new-fit-trak
 
 go 1.20
